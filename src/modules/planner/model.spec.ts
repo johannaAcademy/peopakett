@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { budgetStepSchema, conditionsStepSchema, partyStepSchema, themeStepSchema } from './model';
+import {
+  budgetStepSchema,
+  conditionsStepSchema,
+  costSchema,
+  partyStepSchema,
+  themeStepSchema,
+} from './model';
 
 const futureDate = () => {
   const date = new Date();
@@ -77,5 +83,30 @@ describe('planner validation', () => {
     expect(budgetStepSchema.safeParse({ budgetCents: 10_000, priorities: ['food'] }).success).toBe(
       true,
     );
+  });
+
+  it('validates known-price and quote-based cost rows', () => {
+    const knownPrice = {
+      id: 'venue',
+      title: 'Peokoht',
+      pricingModel: 'fixed',
+      quantity: 1,
+      unitPriceCents: 25_000,
+      priceSource: 'personal-estimate',
+      status: 'estimate',
+    };
+    const quote = {
+      ...knownPrice,
+      id: 'catering',
+      pricingModel: 'quote',
+      unitPriceCents: null,
+      priceSource: 'supplier',
+      status: 'needs-quote',
+    };
+
+    expect(costSchema.safeParse(knownPrice).success).toBe(true);
+    expect(costSchema.safeParse(quote).success).toBe(true);
+    expect(costSchema.safeParse({ ...quote, status: 'estimate' }).success).toBe(false);
+    expect(costSchema.safeParse({ ...knownPrice, unitPriceCents: null }).success).toBe(false);
   });
 });

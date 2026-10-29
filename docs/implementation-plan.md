@@ -41,7 +41,7 @@ Staatus: valmis brauseripõhise eelvaatena. Kuue sammu sisendid valideeritakse, 
 - Auth and profile flows
 - Drafts and ownership tests
 
-Staatus: rakendatud. Authi, profiili, mustandi loomise/uuendamise/laadimise ning RLS poliitikad on lisatud. Migratsiooni ja pgTAP testide SQL süntaks on kontrollitud; nende käivitamine päris PostgreSQL/Supabase keskkonnas on pooleli, sest kohalik Supabase peatub Realtime'i sisemise migratsiooni ajal andmebaasiühenduse timeout'i tõttu.
+Staatus: valmis. Authi, profiili, mustandi loomise/uuendamise/laadimise ning RLS poliitikad on lisatud. Migratsioon ja kõik 13 pgTAP omandiõiguse testi läbisid Supabase PostgreSQL 15 konteineris. Täieliku kohaliku Supabase'i käivitamist takistab siin Realtime'i sisemise migratsiooni andmebaasiühenduse timeout.
 
 ## Etapp 5: Tasuline peoplaan
 

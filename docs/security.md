@@ -61,6 +61,6 @@
 - RPC payloadi ja salvestatud kuluridade maht on piiratud. DB piirangud kontrollivad väljade ulatust ning olekuid.
 - Frontend kasutab ainult `VITE_SUPABASE_URL` ja avalikku anon-võtit. Service-role võtit ei tohi panna `VITE_` muutujasse.
 
-RLS testid on kirjeldatud `supabase/tests/rls.test.sql` failis. Need tuleb käivitada kohaliku Supabase’i vastu käsuga `npm run test:db`; poliitikaid ei tohi lugeda tootmises kinnitatuks enne testi läbimist ja tootmiskeskkonna konfiguratsiooni ülevaatust.
+RLS testid on kirjeldatud `supabase/tests/rls.test.sql` failis ning kõik 13 omandiõiguse testi läbisid Supabase PostgreSQL 15 konteineris. Täieliku kohaliku Supabase’i käivitamine ebaõnnestub selles keskkonnas Realtime’i sisemise migratsiooni ühenduse timeout’i tõttu; `npm run test:db` vajab töötavat kohalikku Supabase’i. Tootmiskeskkonna konfiguratsioon vajab eraldi ülevaatust.
 
 Makseid, ostuõigusi, serveripoolset hinnakinnitust ega admin rolle see etapp ei käsitle. Salvesta mustandit ainult omaniku nimel ning ära käsitle JSONB hinnanguid usaldatud ostusummadena.

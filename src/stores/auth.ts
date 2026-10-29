@@ -61,9 +61,6 @@ export const useAuthStore = defineStore('auth', {
         }
         this.setSession(data.session);
         this.status = 'ready';
-        if (this.user) {
-          await this.loadProfile();
-        }
 
         client.auth.onAuthStateChange((_event, session) => {
           this.setSession(session);
@@ -75,6 +72,10 @@ export const useAuthStore = defineStore('auth', {
             });
           }, 0);
         });
+
+        if (this.user) {
+          await this.loadProfile();
+        }
       } catch (error) {
         this.status = 'error';
         this.error = this.errorMessage(error);
